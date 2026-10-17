@@ -6,36 +6,34 @@
     <title>EVER DREAM THESE MEN?</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Estilo fiel ao site original www.thisman.org */
         body {
             font-family: Georgia, 'Times New Roman', Times, serif;
             background-color: #ffffff;
             color: #111111;
         }
-
-        .sans-text {
-            font-family: Arial, Helvetica, sans-serif;
+        .sans-text { font-family: Arial, Helvetica, sans-serif; }
+        
+        /* Destaque visual quando a edição livre está ativa */
+        .editing-active {
+            outline: 2px dashed #ef4444;
+            background-color: #fef2f2;
+            padding: 4px;
+            transition: all 0.2s;
         }
 
-        /* Estilo para impressão do cartaz oficial */
         @media print {
-            body * {
-                visibility: hidden;
-            }
-            #printablePoster, #printablePoster * {
-                visibility: visible;
-            }
-            #printablePoster {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                display: flex !important;
-            }
+            body * { visibility: hidden; }
+            #printablePoster, #printablePoster * { visibility: visible; }
+            #printablePoster { position: absolute; left: 0; top: 0; width: 100%; display: flex !important; }
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased bg-white text-black relative">
+
+    <!-- Botão Flutuante de Guardar (Aparece apenas no Modo de Edição Livre) -->
+    <button id="floatingSaveBtn" class="hidden fixed top-6 right-6 z-[200] bg-red-600 hover:bg-red-700 text-white font-black py-4 px-8 rounded shadow-2xl uppercase tracking-widest border-2 border-white transition-transform hover:scale-105">
+        💾 Guardar Tudo no Servidor
+    </button>
 
     <!-- Cabeçalho Principal -->
     <header class="w-full border-b border-gray-300 py-6 px-4">
@@ -43,88 +41,58 @@
             <h1 id="db-title" class="text-3xl sm:text-5xl font-bold tracking-tight text-black mb-1 uppercase font-serif">
                 EVER DREAM THESE MEN?
             </h1>
-            <p class="text-base sm:text-lg italic text-gray-700 font-serif">
+            <p id="db-subtitle" class="text-base sm:text-lg italic text-gray-700 font-serif">
                 (VOCÊ JÁ SONHOU COM ESTES HOMENS?)
             </p>
         </div>
     </header>
 
-    <!-- Conteúdo Principal -->
     <main class="max-w-3xl mx-auto px-4 py-8 flex-col items-center flex-grow">
 
-        <!-- Imagem Principal / Retrato Falado -->
+        <!-- Imagem Principal -->
         <div class="w-full flex flex-col items-center mb-10">
             <div class="p-3 bg-white border border-gray-400 shadow-sm max-w-md w-full text-center">
                 <img id="db-main-img" src="https://i.postimg.cc/x13ZPwJQ/1792259794130.jpg" 
-                     alt="Ever Dream These Men? Retrato Falado" 
-                     class="w-full h-auto mx-auto block contrast-125"
-                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/ffffff/000000?text=Ever+Dream+These+Men';">
+                     alt="Retrato Falado" class="w-full h-auto mx-auto block contrast-125">
                 <p class="sans-text text-xs text-gray-600 mt-2 tracking-wide uppercase font-bold">
                     RETRATO FALADO OFICIAL — CASO #2006-D
                 </p>
             </div>
         </div>
 
-        <!-- Seção de Texto / História Estilo Artigo Científico -->
-        <article class="prose prose-lg text-gray-900 leading-relaxed space-y-5 text-justify mb-12 text-base sm:text-lg font-serif">
-            <p>
-                Em janeiro de 2006, em Nova York, o paciente de um conhecido psiquiatra desenhou o rosto dessas quatro figuras que vinham aparecendo repetidamente em seus sonhos. Em mais de uma ocasião, esse paciente garantiu nunca ter visto nenhum desses homens na vida real.
-            </p>
-            <p>
-                O retrato permaneceu esquecido sobre a mesa do médico por alguns dias até que outro paciente, durante uma consulta, reconheceu a imagem e afirmou que os mesmos rostos costumavam visitá-lo em seus sonhos. Ele também jurou nunca ter visto tais pessoas acordado.
-            </p>
-            <p>
-                O psiquiatra decidiu então enviar o desenho para alguns de seus colegas que lidam com pacientes com traumas ou episódios recorrentes de sonhos. Em poucos meses, quatro pacientes reconheceram as presenças. Desde então, <strong>mais de 2.000 pessoas</strong> de diversas partes do mundo (como São Paulo, Los Angeles, Berlim, Nova Délhi e Pequim) afirmam ter visto essas fisionomias enquanto dormiam.
-            </p>
+        <!-- Seção da História -->
+        <article id="db-article" class="prose prose-lg text-gray-900 leading-relaxed space-y-5 text-justify mb-12 text-base sm:text-lg font-serif">
+            <p>Em janeiro de 2006, em Nova York, o paciente de um conhecido psiquiatra desenhou o rosto dessas quatro figuras que vinham aparecendo repetidamente em seus sonhos. Em mais de uma ocasião, esse paciente garantiu nunca ter visto nenhum desses homens na vida real.</p>
+            <p>O retrato permaneceu esquecido sobre a mesa do médico por alguns dias até que outro paciente reconheceu a imagem e afirmou que os mesmos rostos costumavam visitá-lo em seus sonhos.</p>
+            <p>Desde então, <strong>mais de 2.000 pessoas</strong> de diversas partes do mundo afirmam ter visto essas fisionomias enquanto dormiam.</p>
         </article>
 
         <hr class="border-t border-gray-300 w-full mb-10">
 
-        <!-- Seção de Teorias Clássicas -->
+        <!-- Seção de Teorias -->
         <section class="w-full mb-12">
             <h2 class="text-xl sm:text-2xl font-bold font-serif text-black mb-6 border-b border-black pb-2 uppercase">
                 Teorias para o Fenômeno
             </h2>
-
-            <div class="space-y-6 text-sm sm:text-base font-serif text-gray-900">
+            <div id="db-theories" class="space-y-6 text-sm sm:text-base font-serif text-gray-900">
                 <div class="border-l-2 border-black pl-4">
-                    <h3 class="font-bold text-black uppercase sans-text text-sm mb-1">1. Teoria do Inconsciente Coletivo (Arquétipo)</h3>
-                    <p class="leading-relaxed">
-                        Inspirada na psicologia analítica de Carl Jung, esta teoria sugere que estes rostos correspondem a uma imagem arquetípica pertencente ao inconsciente coletivo da humanidade, emergindo em momentos de grande estresse psíquico ou mudanças de vida.
-                    </p>
+                    <h3 class="font-bold text-black uppercase sans-text text-sm mb-1">1. Teoria do Inconsciente Coletivo</h3>
+                    <p class="leading-relaxed">Inspirada na psicologia de Carl Jung, esta teoria sugere que estes rostos correspondem a uma imagem arquetípica pertencente ao inconsciente coletivo da humanidade.</p>
                 </div>
-
                 <div class="border-l-2 border-black pl-4">
-                    <h3 class="font-bold text-black uppercase sans-text text-sm mb-1">2. Teoria da Imitação e Sugestão Psíquica</h3>
-                    <p class="leading-relaxed">
-                        Esta hipótese afirma que o fenômeno é puramente científico e social: após serem expostas à imagem ou ao boato através do boca a boca e da internet, as pessoas assimilam a fisionomia e a reproduzem involuntariamente no estágio de sono REM.
-                    </p>
-                </div>
-
-                <div class="border-l-2 border-black pl-4">
-                    <h3 class="font-bold text-black uppercase sans-text text-sm mb-1">3. Teoria da Projeção Astral / Visitantes</h3>
-                    <p class="leading-relaxed">
-                        Uma explicação metafísica sugere que estas figuras são indivíduos reais capazes de realizar projeção astral consciente e adentrar o plano onírico de pessoas ao redor do globo.
-                    </p>
-                </div>
-
-                <div class="border-l-2 border-black pl-4">
-                    <h3 class="font-bold text-black uppercase sans-text text-sm mb-1">4. Teoria da Anomalia da Memória</h3>
-                    <p class="leading-relaxed">
-                        Sugere que os sonhadores não veem estes rostos no sonho propriamente dito, mas ao acordar e visualizar o retrato falado, o cérebro gera um falso reconhecimento (dejà vu onírico), convencendo o indivíduo de que a visão ocorreu durante a noite.
-                    </p>
+                    <h3 class="font-bold text-black uppercase sans-text text-sm mb-1">2. Teoria da Imitação</h3>
+                    <p class="leading-relaxed">Esta hipótese afirma que o fenômeno é puramente científico e social: as pessoas assimilam a fisionomia e a reproduzem involuntariamente no estágio de sono REM.</p>
                 </div>
             </div>
         </section>
 
         <hr class="border-t border-gray-300 w-full mb-10">
 
-        <!-- Seção de Depoimentos Recentes -->
+        <!-- Depoimentos -->
         <section class="w-full mb-12">
             <h2 class="text-xl sm:text-2xl font-bold font-serif text-black mb-6 border-b border-black pb-2 uppercase">
                 Depoimentos Coletados
             </h2>
-
             <div id="testimonialsContainer" class="space-y-6 font-serif text-sm">
                 <p class="text-gray-500 italic">A carregar relatos...</p>
             </div>
@@ -132,277 +100,186 @@
 
         <hr class="border-t border-gray-300 w-full mb-10">
 
-        <!-- Botão Externo para Relatar um Sonho -->
+        <!-- Botões e Doação -->
         <section class="w-full mb-12 bg-gray-50 p-8 border border-gray-300 text-center">
-            <h2 class="text-xl font-bold font-serif text-black mb-3 uppercase">
-                Você já sonhou com algum deles?
-            </h2>
-            <p class="sans-text text-sm text-gray-600 mb-6">
-                Se você reconhece estes rostos de suas noites de sono, por favor, clique no botão abaixo e envie seu relato confidencial para o nosso banco de dados centralizado.
-            </p>
-            <a href="https://forms.gle/vuyvfSuU4YQuhS9h9" target="_blank" 
-               class="inline-block bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 uppercase text-sm tracking-wider transition-colors">
-                Preencher Relato Oficial
-            </a>
+            <h2 class="text-xl font-bold font-serif text-black mb-3 uppercase">Você já sonhou com algum deles?</h2>
+            <a href="https://forms.gle/vuyvfSuU4YQuhS9h9" target="_blank" class="inline-block bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 uppercase text-sm tracking-wider transition-colors">Preencher Relato Oficial</a>
         </section>
-
-        <!-- Botão para Baixar/Imprimir Cartaz Oficial -->
-        <section class="w-full text-center mb-12">
-            <button onclick="window.print()" 
-                    class="border-2 border-black bg-white hover:bg-black hover:text-white text-black font-bold font-serif py-3 px-8 text-sm uppercase tracking-wider transition-all shadow-sm">
-                Baixar / Imprimir Cartaz em PDF
-            </button>
-        </section>
-
-        <!-- Área Minimalista para Doação -->
+        
         <section class="w-full flex flex-col items-center justify-center border-t border-gray-300 pt-8 pb-4">
             <h3 class="text-xs sans-text font-bold text-gray-500 uppercase tracking-widest mb-3">Apoie a Pesquisa</h3>
-            <img src="https://i.postimg.cc/dV26YGwf/qrcode-pix.png" alt="QR Code Doação Pix" class="w-28 h-28 border border-gray-200 p-1 mb-2 opacity-90 hover:opacity-100 transition-opacity">
+            <img src="https://i.postimg.cc/dV26YGwf/qrcode-pix.png" class="w-28 h-28 border border-gray-200 p-1 mb-2">
             <p class="text-xs text-gray-400 sans-text">Doe via Pix escaneando o código acima.</p>
         </section>
 
     </main>
 
-    <!-- Rodapé Minimalista -->
     <footer class="w-full border-t border-gray-300 py-8 text-center flex flex-col items-center relative">
-        <div class="sans-text text-xs text-gray-500 mb-4">
-            <p class="font-bold text-gray-700">WWW.THISMAN.ORG — ARCHIVE PROJECT</p>
-            <p class="mt-1">Todas as informações são mantidas exclusivamente para fins de pesquisa e documentação do fenómeno.</p>
-        </div>
-
-        <!-- Botão Instagram -->
-        <a href="https://www.instagram.com/celestialalianca?psln=bWl3cjVjdmlvcTlv" target="_blank" class="text-gray-400 hover:text-black transition-colors" title="Siga nosso Instagram">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-            </svg>
-        </a>
+        <p class="font-bold text-gray-700 text-xs">WWW.THISMAN.ORG — ARCHIVE PROJECT</p>
     </footer>
 
-    <!-- Gatilho Invisível Fixo no canto inferior direito para acesso ao Admin -->
+    <!-- Gatilho Invisível para Admin (Canto Inferior Direito) -->
     <div id="adminTrigger" class="fixed bottom-0 right-0 w-16 h-16 cursor-default z-50"></div>
 
-    <!-- Modal do Painel de Admin Secreto -->
+    <!-- Modal do Painel de Admin -->
     <div id="adminPanel" class="hidden fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-[100] p-4">
         <div class="bg-white p-6 rounded-md max-w-lg w-full font-sans border-2 border-black">
             <div class="flex justify-between items-center border-b-2 border-black pb-3 mb-4">
-                <h3 class="text-xl font-black uppercase tracking-wider text-black">Painel Admin Firebase</h3>
+                <h3 class="text-xl font-black uppercase tracking-wider text-black">Painel de Controlo</h3>
                 <button id="closeAdminBtn" class="text-gray-500 hover:text-black font-bold text-xl">×</button>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-6">
+                <!-- Modo Edição Livre -->
+                <div class="p-4 border-2 border-red-600 bg-red-50 text-center">
+                    <h4 class="font-black text-red-700 text-lg mb-2 uppercase">Modo Deus (Edição de Textos)</h4>
+                    <p class="text-xs text-red-600 mb-4">Clica abaixo para ativar a edição livre. Poderás clicar em qualquer texto do site (títulos, histórias, teorias) e reescrevê-lo diretamente no ecrã.</p>
+                    <button id="activateLiveEditBtn" class="w-full bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-4 text-sm uppercase tracking-wider transition-colors">
+                        Ativar Edição Livre na Tela
+                    </button>
+                </div>
+
+                <!-- Edição da Imagem (Separada porque imagens não se digitam) -->
                 <div class="p-4 border border-gray-300 bg-gray-50">
-                    <h4 class="font-bold text-sm mb-1 uppercase">Edição do Título Principal</h4>
-                    <input type="text" id="adminTitleInput" class="w-full border p-2 text-sm mb-3">
-
-                    <h4 class="font-bold text-sm mb-1 uppercase">URL da Imagem Principal</h4>
-                    <input type="text" id="adminImgInput" class="w-full border p-2 text-sm mb-3">
-
-                    <button id="saveConfigBtn" class="w-full bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 text-xs uppercase tracking-wider transition-colors">
-                        Salvar Alterações
+                    <h4 class="font-bold text-sm mb-1 uppercase">Trocar Imagem Principal (URL)</h4>
+                    <input type="text" id="adminImgInput" class="w-full border p-2 text-sm mb-3" placeholder="https://i.postimg.cc/...">
+                    <button id="saveImgBtn" class="w-full bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 text-xs uppercase transition-colors">
+                        Guardar Nova Imagem
                     </button>
                 </div>
             </div>
 
-            <div class="mt-6 text-right">
-                <button id="closeAdminBtn2" class="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-6 text-sm uppercase transition-colors">Fechar Painel</button>
+            <div class="mt-4 text-right">
+                <button id="closeAdminBtn2" class="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-6 text-xs uppercase">Fechar</button>
             </div>
         </div>
     </div>
 
-    <!-- Elemento Oculto Apenas para Impressão do Cartaz -->
-    <div id="printablePoster" class="hidden flex-col items-center justify-between text-center p-8 bg-white text-black min-h-screen w-full">
-        <div class="w-full">
-            <h1 class="text-5xl font-black font-serif border-b-4 border-black pb-4 mb-4 tracking-tight">
-                EVER DREAM THESE MEN?
-            </h1>
-            <h2 class="text-2xl font-serif italic mb-8">VOCÊ JÁ SONHOU COM ESTES HOMENS?</h2>
-            
-            <div class="my-6 flex justify-center">
-                <img src="https://i.postimg.cc/x13ZPwJQ/1792259794130.jpg" alt="Ever Dream These Men" class="max-w-md w-full border-2 border-black">
-            </div>
-
-            <p class="text-lg font-serif max-w-xl mx-auto my-8 leading-relaxed">
-                Todas as noites, em diferentes partes do mundo, centenas de pessoas relatam ver estes rostos em seus sonhos. Se você já os viu ou tem informações, acesse o site oficial.
-            </p>
-        </div>
-
-        <div class="border-t-2 border-black w-full pt-4 font-serif">
-            <p class="text-sm font-bold uppercase tracking-widest">Acesse e Envie Seu Depoimento:</p>
-            <p class="text-2xl font-bold underline mt-1">www.thisman.org</p>
-        </div>
-    </div>
-
-    <!-- ÚNICO SCRIPT: MÓDULO JAVASCRIPT + FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // As tuas configurações exatas do Firebase:
         const firebaseConfig = {
             apiKey: "AIzaSyDOBZdcp9Fr35A4mprRk3nCqyEIfNq_k3o",
             authDomain: "thesemans-7f22a.firebaseapp.com",
             projectId: "thesemans-7f22a",
             storageBucket: "thesemans-7f22a.firebasestorage.app",
             messagingSenderId: "609155842366",
-            appId: "1:609155842366:web:cd9ecbbf51701e7db46c6f",
-            measurementId: "G-RJ6NDDTRT2"
+            appId: "1:609155842366:web:cd9ecbbf51701e7db46c6f"
         };
 
-        // Inicialização
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
-        // Relatos Padrão (Fallback)
-        const defaultTestimonials = [
-            {
-                name: "K. Rodrigues",
-                location: "Local Não Divulgado",
-                date: "Relato Recente",
-                text: "Em uma certa noite, que foi uma das piores que já tive, fui dormir para que o dia passasse logo, já que estava extremamente estressado e frustrado. Mas o ponto não é esse, e sim o meu sonho.\n\nEu nunca tinha visto aqueles homens, se é que posso chamá-los assim. Talvez seja mais apropriado chamá-los de seres. Continuando, eu nunca havia visto nada parecido com eles em minha vida inteira.\n\nQuando caí no sono, sonhei que estava em um local pouco iluminado. Sinceramente, não me lembro ao certo de onde era aquele lugar. Porém, quando comecei a caminhar, vi uma dessas figuras, especificamente a do canto inferior esquerdo. Digo isso porque, ao menos, ela possui uma grande semelhança com a figura da imagem.\n\nEle estava parado, encarando uma parede que, para falar a verdade, não parecia ser uma parede de verdade. Parecia falsa, mas não sei dizer ao certo. Sabe aquela textura de isopor? Era essa a textura que a porta possuía.\n\nSinceramente, eu estava com um pouco de medo. Uma figura que eu nunca havia visto, encarando uma parede falsa, era, no mínimo, estranha. Porém, minha curiosidade falou mais alto, e então tentei olhar para o rosto daquela figura.\n\nAssim que me virei para vê-lo, acordei do sonho, totalmente arrepiado e com um nome que não saía da minha cabeça. Era um nome com K. Eu estava com tanto medo que não consegui me lembrar daquele nome.\n\nAssim que acordei, fiquei uns cinco minutos pensando no que havia acontecido e em como aquele sonho parecia muito real. Mas pensei comigo mesmo: \"Muitas vezes, os sonhos podem parecer reais até demais. Provavelmente, não é nada\".\n\nApós isso, levantei-me e fui beber água, pois estava morrendo de medo. Enquanto enchia meu copo, olhei para o celular para verificar o horário. Eram aproximadamente 2h45 da madrugada.\n\nQuando terminei de encher o copo, fui comentar sobre o sonho com meus pais, porém, eles não estavam lá àquela hora, algo meio incomum, considerando o horário. Fiquei com uma pulga atrás da orelha, mas decidi ignorar.\n\nLogo depois, fui até meu quarto para me deitar. Assim que entrei, percebi três coisas. A primeira foi que o quarto praticamente havia duplicado de tamanho. A segunda foi que havia um relógio em um dos cantos do quarto.\n\nQuando me virei para a direita, vi uma figura.\n\nNaquele momento, fiquei paralisado. O rosto daquele ser estava totalmente borrado, sem nada em sua face. Essa é a lembrança de que mais me recordo com clareza.\n\nPor mais que ele estivesse sem rosto, tenho plena certeza de que era o homem do canto superior esquerdo. Não sei dizer o porquê, mas eu sei. Tenho total certeza.\n\nApós vê-lo, lembro-me de ter apagado logo em seguida.\n\nQuando acordei, estava no quintal da minha casa, tomando sol, algo que faz parte da minha rotina. Mas era como se, antes de acordar, não fosse eu quem estivesse ali, até porque eu estava totalmente inconsciente.\n\nTalvez meu corpo tenha reagido sozinho, já que tomar sol é algo que faço habitualmente. Ou talvez eu simplesmente não me lembre do que aconteceu.\n\nSó sei que, depois disso, passei a sonhar frequentemente com Israel. De verdade, não sei o motivo disso e, sinceramente, tenho até medo de descobrir."
-            },
-            {
-                name: "R. A.",
-                location: "São Paulo, Brasil",
-                date: "10/10/2026",
-                text: "Eu estava andando por uma rua totalmente vazia de madrugada. O homem do canto superior esquerdo estava parado sob a iluminação de um poste apenas olhando para mim sem piscar."
-            },
-            {
-                name: "J. Miller",
-                location: "Chicago, EUA",
-                date: "28/09/2026",
-                text: "Sonhei que estava dentro de um elevador que não parava de subir. Quando as portas se abriram, as quatro figuras estavam em pé em uma sala branca silenciosa."
-            },
-            {
-                name: "H. Takahashi",
-                location: "Tóquio, Japão",
-                date: "14/08/2026",
-                text: "Vi a figura do canto inferior direito no espelho da minha casa durante um sonho lúcido. Ele não falava nada, apenas apontava para o relógio da parede."
-            }
-        ];
-
-        // Função de escape para evitar quebras de HTML
-        function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
-        }
-
-        // Renderiza Testemunhos
-        function renderTestimonials(list) {
-            const container = document.getElementById('testimonialsContainer');
-            if(!container) return;
-            container.innerHTML = '';
-
-            list.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'border-b border-gray-200 pb-4';
-                const formattedText = escapeHTML(item.text).replace(/\n/g, '<br>');
-                
-                div.innerHTML = `
-                    <div class="flex justify-between text-xs sans-text font-bold text-gray-700 mb-2">
-                        <span>${escapeHTML(item.name)} — ${escapeHTML(item.location)}</span>
-                        <span class="text-gray-500 font-normal">${escapeHTML(item.date)}</span>
-                    </div>
-                    <p class="text-gray-900 italic leading-relaxed text-justify">"${formattedText}"</p>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Renderização inicial
-        renderTestimonials(defaultTestimonials);
-
-        // Escuta edições do site no Firebase em Tempo Real (Título e Imagem)
         const siteDocRef = doc(db, "config", "siteData");
+
+        // Elementos Editáveis na Tela
+        const editableElements = ['db-title', 'db-subtitle', 'db-article', 'db-theories'];
+
+        // Sincroniza em Tempo Real com o Firebase
         onSnapshot(siteDocRef, (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                if (data.title) {
-                    const titleElem = document.getElementById('db-title');
-                    if(titleElem) titleElem.innerText = data.title;
-                }
-                if (data.imgUrl) {
-                    const imgElem = document.getElementById('db-main-img');
-                    if(imgElem) imgElem.src = data.imgUrl;
-                }
+                if (data.title) document.getElementById('db-title').innerText = data.title;
+                if (data.subtitle) document.getElementById('db-subtitle').innerText = data.subtitle;
+                if (data.imgUrl) document.getElementById('db-main-img').src = data.imgUrl;
+                if (data.article) document.getElementById('db-article').innerHTML = data.article;
+                if (data.theories) document.getElementById('db-theories').innerHTML = data.theories;
             }
         });
 
-        // Escuta os relatos do Firebase (caso queiras gerir os relatos pela BD futuramente)
-        const reportsRef = doc(db, "config", "reportsData");
-        onSnapshot(reportsRef, (docSnap) => {
-            if (docSnap.exists() && docSnap.data().list) {
-                renderTestimonials(docSnap.data().list);
-            }
-        });
-
-        // ==========================================
-        // LÓGICA DO PAINEL DE ADMINISTRAÇÃO SECRETO
-        // ==========================================
-        let clickCount = 0;
-        let clickTimer;
-
-        const adminTrigger = document.getElementById('adminTrigger');
-        if (adminTrigger) {
-            adminTrigger.addEventListener('click', () => {
-                clickCount++;
-                clearTimeout(clickTimer);
-                
-                if (clickCount >= 5) {
-                    const adminPanel = document.getElementById('adminPanel');
-                    if (adminPanel) adminPanel.classList.remove('hidden');
-
-                    const titleElem = document.getElementById('db-title');
-                    const imgElem = document.getElementById('db-main-img');
-                    
-                    if (titleElem && document.getElementById('adminTitleInput')) {
-                        document.getElementById('adminTitleInput').value = titleElem.innerText;
-                    }
-                    if (imgElem && document.getElementById('adminImgInput')) {
-                        document.getElementById('adminImgInput').value = imgElem.src;
-                    }
-                    
-                    clickCount = 0;
-                } else {
-                    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
-                }
-            });
-        }
-
-        const closeAdmin = () => {
-            const adminPanel = document.getElementById('adminPanel');
-            if (adminPanel) adminPanel.classList.add('hidden');
-        };
-
-        const closeBtn1 = document.getElementById('closeAdminBtn');
-        const closeBtn2 = document.getElementById('closeAdminBtn2');
-        if (closeBtn1) closeBtn1.addEventListener('click', closeAdmin);
-        if (closeBtn2) closeBtn2.addEventListener('click', closeAdmin);
-
-        // Salvar dados no Firestore de forma direta
-        const saveBtn = document.getElementById('saveConfigBtn');
-        if (saveBtn) {
-            saveBtn.addEventListener('click', async () => {
-                const newTitle = document.getElementById('adminTitleInput')?.value;
-                const newImg = document.getElementById('adminImgInput')?.value;
-
-                if (!newTitle || !newImg) {
-                    alert("Preenche os campos de texto.");
-                    return;
-                }
-
-                try {
-                    await setDoc(siteDocRef, {
-                        title: newTitle,
-                        imgUrl: newImg
-                    });
-
-                    alert("Alterado com sucesso! Se carregares no F5 agora, os dados vão continuar lá.");
-                    closeAdmin();
-                } catch (error) {
-                    alert("O GOOGLE BLOQUEOU A GRAVAÇÃO. Motivo: " + error.message);
-                }
-            });
-        }
+        // Testemunhos
+        const defaultTestimonials = [
+            { name: "K. Rodrigues", location: "Local Não Divulgado", date: "Relato Recente", text: "Eu nunca tinha visto aqueles homens..." },
+            { name: "R. A.", location: "São Paulo, Brasil", date: "10/10/2026", text: "Eu estava andando por uma rua vazia de madrugada..." }
+        ];
         
+        function escapeHTML(str) { return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)); }
+        
+        const renderTestimonials = (list) => {
+            const container = document.getElementById('testimonialsContainer');
+            if(!container) return;
+            container.innerHTML = '';
+            list.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'border-b border-gray-200 pb-4';
+                div.innerHTML = `<div class="flex justify-between text-xs font-bold mb-2"><span>${escapeHTML(item.name)}</span><span class="text-gray-500">${escapeHTML(item.date)}</span></div><p class="text-gray-900 italic">"${escapeHTML(item.text).replace(/\n/g, '<br>')}"</p>`;
+                container.appendChild(div);
+            });
+        };
+        renderTestimonials(defaultTestimonials);
+
+        // Lógica do Gatilho 5 Cliques
+        let clickCount = 0; let clickTimer;
+        document.getElementById('adminTrigger')?.addEventListener('click', () => {
+            clickCount++; clearTimeout(clickTimer);
+            if (clickCount >= 5) {
+                document.getElementById('adminPanel').classList.remove('hidden');
+                document.getElementById('adminImgInput').value = document.getElementById('db-main-img').src;
+                clickCount = 0;
+            } else {
+                clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+            }
+        });
+
+        const closeAdmin = () => document.getElementById('adminPanel').classList.add('hidden');
+        document.getElementById('closeAdminBtn')?.addEventListener('click', closeAdmin);
+        document.getElementById('closeAdminBtn2')?.addEventListener('click', closeAdmin);
+
+        // Ativar Modo Edição Livre (God Mode)
+        document.getElementById('activateLiveEditBtn')?.addEventListener('click', () => {
+            closeAdmin();
+            editableElements.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.contentEditable = "true";
+                    el.classList.add('editing-active');
+                }
+            });
+            document.getElementById('floatingSaveBtn').classList.remove('hidden');
+            alert("MODO DEUS ATIVADO! Clica em qualquer texto do site e edita. Quando terminares, clica no botão vermelho gigante no topo.");
+        });
+
+        // Guardar TUDO no Firebase (Botão Flutuante Vermelho)
+        document.getElementById('floatingSaveBtn')?.addEventListener('click', async () => {
+            const newTitle = document.getElementById('db-title').innerText;
+            const newSubtitle = document.getElementById('db-subtitle').innerText;
+            const newArticle = document.getElementById('db-article').innerHTML;
+            const newTheories = document.getElementById('db-theories').innerHTML;
+            const currentImg = document.getElementById('db-main-img').src;
+
+            try {
+                await setDoc(siteDocRef, {
+                    title: newTitle,
+                    subtitle: newSubtitle,
+                    article: newArticle,
+                    theories: newTheories,
+                    imgUrl: currentImg
+                }, { merge: true });
+
+                // Desativa a edição
+                editableElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) { el.contentEditable = "false"; el.classList.remove('editing-active'); }
+                });
+                document.getElementById('floatingSaveBtn').classList.add('hidden');
+                alert("Absolutamente tudo foi guardado no banco de dados com sucesso!");
+            } catch (error) {
+                alert("ERRO AO GUARDAR: " + error.message);
+            }
+        });
+
+        // Guardar apenas Imagem pelo Painel
+        document.getElementById('saveImgBtn')?.addEventListener('click', async () => {
+            const newImg = document.getElementById('adminImgInput').value;
+            if(!newImg) return;
+            try {
+                await setDoc(siteDocRef, { imgUrl: newImg }, { merge: true });
+                alert("Imagem guardada com sucesso!");
+                closeAdmin();
+            } catch (error) {
+                alert("ERRO AO GUARDAR IMAGEM: " + error.message);
+            }
+        });
     </script>
 </body>
 </html>
