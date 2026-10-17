@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVER DREAM THESE MEN? - www.thisman.org style</title>
+    <title>EVER DREAM THESE MEN?</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Estilo fiel ao site original www.thisman.org */
@@ -456,7 +456,7 @@
         if (closeBtn1) closeBtn1.addEventListener('click', closeAdmin);
         if (closeBtn2) closeBtn2.addEventListener('click', closeAdmin);
 
-        // Salvar alterações no Firebase em tempo real
+        // Salvar dados no Firestore de forma direta
         const saveBtn = document.getElementById('saveConfigBtn');
         if (saveBtn) {
             saveBtn.addEventListener('click', async () => {
@@ -464,7 +464,7 @@
                 const newImg = document.getElementById('adminImgInput')?.value;
 
                 if (!newTitle || !newImg) {
-                    alert("Preencha todos os campos do painel admin.");
+                    alert("Preencha os campos de texto.");
                     return;
                 }
 
@@ -472,16 +472,17 @@
                     await setDoc(siteDocRef, {
                         title: newTitle,
                         imgUrl: newImg
-                    }, { merge: true });
+                    });
 
-                    alert("Atualizado com sucesso! Todos os usuários verão as mudanças na mesma hora.");
+                    alert("Alterado com sucesso! Se você der F5 agora, os dados vão continuar lá.");
                     closeAdmin();
                 } catch (error) {
-                    console.error("Erro ao salvar no Firestore:", error);
-                    alert("Erro ao salvar no banco. Verifique se as Regras do Firestore Database estão no modo de teste (allow read, write: if true;).");
+                    // ISSO VAI MOSTRAR O MOTIVO EXATO DO BLOQUEIO NA TELA
+                    alert("O GOOGLE BLOQUEOU A GRAVAÇÃO. Motivo: " + error.message);
                 }
             });
         }
+        
     </script>
 </body>
 </html>
