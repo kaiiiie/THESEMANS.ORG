@@ -13,7 +13,6 @@
         }
         .sans-text { font-family: Arial, Helvetica, sans-serif; }
         
-        /* Destaque visual quando a edição livre está ativa */
         .editing-active {
             outline: 2px dashed #ef4444;
             background-color: #fef2f2;
@@ -139,7 +138,7 @@
                     </button>
                 </div>
 
-                <!-- Edição da Imagem (Separada porque imagens não se digitam) -->
+                <!-- Edição da Imagem -->
                 <div class="p-4 border border-gray-300 bg-gray-50">
                     <h4 class="font-bold text-sm mb-1 uppercase">Trocar Imagem Principal (URL)</h4>
                     <input type="text" id="adminImgInput" class="w-full border p-2 text-sm mb-3" placeholder="https://i.postimg.cc/...">
@@ -172,7 +171,6 @@
         const db = getFirestore(app);
         const siteDocRef = doc(db, "config", "siteData");
 
-        // Elementos Editáveis na Tela
         const editableElements = ['db-title', 'db-subtitle', 'db-article', 'db-theories'];
 
         // Sincroniza em Tempo Real com o Firebase
@@ -187,10 +185,26 @@
             }
         });
 
-        // Testemunhos
+        // Depoimentos atualizados com K. Rodrigues e Luccas H. L. Santos de Itapetininga, SP
         const defaultTestimonials = [
-            { name: "K. Rodrigues", location: "Local Não Divulgado", date: "Relato Recente", text: "Eu nunca tinha visto aqueles homens..." },
-            { name: "R. A.", location: "São Paulo, Brasil", date: "10/10/2026", text: "Eu estava andando por uma rua vazia de madrugada..." }
+            {
+                name: "K. Rodrigues",
+                location: "Itapetininga, SP",
+                date: "Relato Recente",
+                text: "Em uma certa noite, que foi uma das piores que já tive, fui dormir para que o dia passasse logo, já que estava extremamente estressado e frustrado. Mas o ponto não é esse, e sim o meu sonho.\n\nEu nunca tinha visto aqueles homens, se é que posso chamá-los assim. Talvez seja mais apropriado chamá-los de seres. Continuando, eu nunca havia visto nada parecido com eles em minha vida inteira.\n\nQuando caí no sono, sonhei que estava em um local pouco iluminado. Sinceramente, não me lembro ao certo de onde era aquele lugar. Porém, quando comecei a caminhar, vi uma dessas figuras, especificamente a do canto inferior esquerdo. Digo isso porque, ao menos, ela possui uma grande semelhança com a figura da imagem.\n\nEle estava parado, encarando uma parede que, para falar a verdade, não parecia ser uma parede de verdade. Parecia falsa, mas não sei dizer ao certo. Sabe aquela textura de isopor? Era essa a textura que a porta possuía.\n\nSinceramente, eu estava com um pouco de medo. Uma figura que eu nunca havia visto, encarando uma parede falsa, era, no mínimo, estranha. Porém, minha curiosidade falou mais alto, e então tentei olhar para o rosto daquela figura.\n\nAssim que me virei para vê-lo, acordei do sonho, totalmente arrepiado e com um nome que não saía da minha cabeça. Era um nome com K. Eu estava com tanto medo que não consegui me lembrar daquele nome.\n\nAssim que acordei, fiquei uns cinco minutos pensando no que havia acontecido e em como aquele sonho parecia muito real. Mas pensei comigo mesmo: \"Muitas vezes, os sonhos podem parecer reais até demais. Provavelmente, não é nada\".\n\nApós isso, levantei-me e fui beber água, pois estava morrendo de medo. Enquanto enchia meu copo, olhei para o celular para verificar o horário. Eram aproximadamente 2h45 da madrugada.\n\nQuando terminei de encher o copo, fui comentar sobre o sonho com meus pais, porém, eles não estavam lá àquela hora, algo meio incomum, considerando o horário. Fiquei com uma pulga atrás da orelha, mas decidi ignorar.\n\nLogo depois, fui até meu quarto para me deitar. Assim que entrei, percebi três coisas. A primeira foi que o quarto praticamente havia duplicado de tamanho. A segunda foi que havia um relógio em um dos cantos do quarto.\n\nQuando me virei para a direita, vi uma figura.\n\nNaquele momento, fiquei paralisado. O rosto daquele ser estava totalmente borrado, sem nada em sua face. Essa é a lembrança de que mais me recordo com clareza.\n\nPor mais que ele estivesse sem rosto, tenho plena certeza de que era o homem do canto superior esquerdo. Não sei dizer o porquê, mas eu sei. Tenho total certeza.\n\nApós vê-lo, lembro-me de ter apagado logo em seguida.\n\nQuando acordei, estava no quintal da minha casa, tomando sol, algo que faz parte da minha rotina. Mas era como se, antes de acordar, não fosse eu quem estivesse ali, até porque eu estava totalmente inconsciente.\n\nTalvez meu corpo tenha reagido sozinho, já que tomar sol é algo que faço habitualmente. Ou talvez eu simplesmente não me lembre do que aconteceu.\n\nSó sei que, depois disso, passei a sonhar frequentemente com Israel. De verdade, não sei o motivo disso e, sinceramente, tenho até medo de descobrir."
+            },
+            {
+                name: "Luccas H. L. Santos.",
+                location: "Itapetininga, SP",
+                date: "Relato Recente",
+                text: "O sonho foi extremamente assustador!\nEu fui perseguido por todos esses caras e a cabeça deles flutuava na minha direção não importava aonde eu me escondesse.\nEscutava vozes sussurrando e parecia que eles estavam dentro da minha cabeça, dizendo coisas intangíveis enquanto tentavam me fazer parar de correr.\nLembro-me da sensação de medo ao acordar e algum desses rostos estar a espreita, esperando apenas eu me mover para se revelarem...\nDesde então, virei um agente paranormal em busca destes homens. Muito obrigado pelos seus estudos, seja lá quem for, está me ajudando a caçar esses monstros."
+            },
+            {
+                name: "R. A.",
+                location: "São Paulo, Brasil",
+                date: "10/10/2026",
+                text: "Eu estava andando por uma rua totalmente vazia de madrugada. O homem do canto superior esquerdo estava parado sob a iluminação de um poste apenas olhando para mim sem piscar."
+            }
         ];
         
         function escapeHTML(str) { return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)); }
@@ -202,7 +216,7 @@
             list.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'border-b border-gray-200 pb-4';
-                div.innerHTML = `<div class="flex justify-between text-xs font-bold mb-2"><span>${escapeHTML(item.name)}</span><span class="text-gray-500">${escapeHTML(item.date)}</span></div><p class="text-gray-900 italic">"${escapeHTML(item.text).replace(/\n/g, '<br>')}"</p>`;
+                div.innerHTML = `<div class="flex justify-between text-xs font-bold mb-2"><span>${escapeHTML(item.name)} — ${escapeHTML(item.location)}</span><span class="text-gray-500">${escapeHTML(item.date)}</span></div><p class="text-gray-900 italic leading-relaxed text-justify">"${escapeHTML(item.text).replace(/\n/g, '<br>')}"</p>`;
                 container.appendChild(div);
             });
         };
@@ -256,7 +270,6 @@
                     imgUrl: currentImg
                 }, { merge: true });
 
-                // Desativa a edição
                 editableElements.forEach(id => {
                     const el = document.getElementById(id);
                     if(el) { el.contentEditable = "false"; el.classList.remove('editing-active'); }
