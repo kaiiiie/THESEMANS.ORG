@@ -415,45 +415,73 @@
             );
         }
 
-        // Lógica do Painel Admin (5 cliques no canto inferior direito)
+                // Lógica do Painel Admin (5 cliques no canto inferior direito)
         let clickCount = 0;
         let clickTimer;
 
-        document.getElementById('adminTrigger').addEventListener('click', () => {
-            clickCount++;
-            clearTimeout(clickTimer);
-            if (clickCount >= 5) {
-                document.getElementById('adminPanel').classList.remove('hidden');
-                document.getElementById('adminTitleInput').value = document.getElementById('db-title').innerText;
-                document.getElementById('adminImgInput').value = document.getElementById('db-main-img').src;
-                clickCount = 0;
-            } else {
-                clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
-            }
-        });
+        const adminTrigger = document.getElementById('adminTrigger');
+        if (adminTrigger) {
+            adminTrigger.addEventListener('click', () => {
+                clickCount++;
+                clearTimeout(clickTimer);
+                
+                if (clickCount >= 5) {
+                    const adminPanel = document.getElementById('adminPanel');
+                    if (adminPanel) adminPanel.classList.remove('hidden');
 
-        const closeAdmin = () => document.getElementById('adminPanel').classList.add('hidden');
-        document.getElementById('closeAdminBtn').addEventListener('click', closeAdmin);
-        document.getElementById('closeAdminBtn2').addEventListener('click', closeAdmin);
+                    const titleElem = document.getElementById('db-title');
+                    const imgElem = document.getElementById('db-main-img');
+                    
+                    if (titleElem && document.getElementById('adminTitleInput')) {
+                        document.getElementById('adminTitleInput').value = titleElem.innerText;
+                    }
+                    if (imgElem && document.getElementById('adminImgInput')) {
+                        document.getElementById('adminImgInput').value = imgElem.src;
+                    }
+                    
+                    clickCount = 0;
+                } else {
+                    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+                }
+            });
+        }
+
+        const closeAdmin = () => {
+            const adminPanel = document.getElementById('adminPanel');
+            if (adminPanel) adminPanel.classList.add('hidden');
+        };
+
+        const closeBtn1 = document.getElementById('closeAdminBtn');
+        const closeBtn2 = document.getElementById('closeAdminBtn2');
+        if (closeBtn1) closeBtn1.addEventListener('click', closeAdmin);
+        if (closeBtn2) closeBtn2.addEventListener('click', closeAdmin);
 
         // Salvar alterações no Firebase em tempo real
-        document.getElementById('saveConfigBtn').addEventListener('click', async () => {
-            const newTitle = document.getElementById('adminTitleInput').value;
-            const newImg = document.getElementById('adminImgInput').value;
+        const saveBtn = document.getElementById('saveConfigBtn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', async () => {
+                const newTitle = document.getElementById('adminTitleInput')?.value;
+                const newImg = document.getElementById('adminImgInput')?.value;
 
-            try {
-                await setDoc(siteDocRef, {
-                    title: newTitle,
-                    imgUrl: newImg
-                }, { merge: true });
+                if (!newTitle || !newImg) {
+                    alert("Preencha todos os campos do painel admin.");
+                    return;
+                }
 
-                alert("Atualizado com sucesso! Todos os utilizadores verão as mudanças instantaneamente.");
-                closeAdmin();
-            } catch (error) {
-                console.error("Erro ao salvar:", error);
-                alert("Erro ao salvar no banco. Verifique se ativou o Firestore Database no modo de teste no painel do Firebase.");
-            }
-        });
+                try {
+                    await setDoc(siteDocRef, {
+                        title: newTitle,
+                        imgUrl: newImg
+                    }, { merge: true });
+
+                    alert("Atualizado com sucesso! Todos os usuários verão as mudanças na mesma hora.");
+                    closeAdmin();
+                } catch (error) {
+                    console.error("Erro ao salvar no Firestore:", error);
+                    alert("Erro ao salvar no banco. Verifique se as Regras do Firestore Database estão no modo de teste (allow read, write: if true;).");
+                }
+            });
+        }
     </script>
 </body>
 </html>
